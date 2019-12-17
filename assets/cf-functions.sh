@@ -266,10 +266,12 @@ function cf_create_route() {
   local domain=${2:?domain null or not set}
   local hostname=${3:-}
   local path=${4:-}
+  local port=${5:-}
 
   local args=("$space" "$domain")
   [ -n "$hostname" ] && args+=(--hostname "$hostname")
   [ -n "$path" ]     && args+=(--path "$path")
+  [ -n "$port" ]     && args+=(--port "$port")
 
   cf create-route "${args[@]}"
 }
@@ -278,10 +280,12 @@ function cf_delete_route() {
   local domain=${1:?domain null or not set}
   local hostname=${2:-}
   local path=${3:-}
+  local port=${4:-}
 
   local args=("$domain")
   [ -n "$hostname" ] && args+=(--hostname "$hostname")
   [ -n "$path" ]     && args+=(--path "$path")
+  [ -n "$port" ]     && args+=(--port "$port")
 
   cf delete-route -f "${args[@]}"
 }
@@ -291,10 +295,12 @@ function cf_map_route() {
   local domain=${2:?domain null or not set}
   local hostname=${3:-}
   local path=${4:-}
+  local port=${5:-}
 
   local args=("$app_name" "$domain")
   [ -n "$hostname" ] && args+=(--hostname "$hostname")
   [ -n "$path" ]     && args+=(--path "$path")
+  [ -n "$port" ]     && args+=(--port "$port")
 
   cf map-route "${args[@]}"
 }
@@ -304,10 +310,12 @@ function cf_unmap_route() {
   local domain=${2:?domain null or not set}
   local hostname=${3:-}
   local path=${4:-}
+  local port=${5:-}
 
   local args=("$app_name" "$domain")
   [ -n "$hostname" ] && args+=(--hostname "$hostname")
-  [ -n "$path" ] && args+=(--path "$path")
+  [ -n "$path" ]     && args+=(--path "$path")
+  [ -n "$port" ]     && args+=(--port "$port")
 
   cf unmap-route "${args[@]}"
 }
